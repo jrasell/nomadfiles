@@ -2,8 +2,8 @@
 # cluster as a system task. This ensures it will run on all nomad nodes which
 # have avaiable resources.
 job "fabio" {
-  datacenters = ["${DATACENTER_NAME}"]
-  region      = "${REGION}"
+  datacenters = ["jrasell"]
+  region      = "london"
   type        = "system"
 
   update {
@@ -21,15 +21,11 @@ job "fabio" {
       driver = "exec"
 
       config {
-        command = "./fabio-1.3.7-go1.7.4-linux_amd64"
+        command = "./NOMAD_PARAM_fabio_command"
       }
 
       artifact {
-        source = "https://github.com/eBay/fabio/releases/download/v1.3.7/fabio-1.3.7-go1.7.4-linux_amd64"
-
-        options {
-          checksum = "sha256:3ddc4493b1b605f885212907fc4d16d350fb9d8f1f01dc064f0ad2083a0a8a1e"
-        }
+        source = "https://github.com/eBay/fabio/releases/download/vNOMAD_PARAM_fabio_version/NOMAD_PARAM_fabio_command"
       }
 
       service {
@@ -47,7 +43,7 @@ job "fabio" {
 
       resources {
         cpu    = 500
-        memory = 60
+        memory = 512
 
         network {
           mbits = 1
