@@ -4,12 +4,12 @@ node {
         def nomad_docker = docker.image('djenriquez/nomad:v0.5.4')
         nomad_docker.pull()
 
-        def nomad_job = "${env.JOB_NAME}".tokenize( '_' )[1]
+        def nomad_job = "${env.JOB_NAME}".tokenize( '_' )[3]
 
         stage 'dynamic update of job parameters'
 
-        sh("sed -ie 's/NOMAD_PARAM_${env.JOB_NAME}_command/${command}/g' ./${nomad_job}/${nomad_job}.nomad")
-        sh("sed -ie 's/NOMAD_PARAM_${env.JOB_NAME}_version/${version}/g' ./${nomad_job}/${nomad_job}.nomad")
+        sh("sed -ie 's/NOMAD_PARAM_${nomad_job}_command/${command}/g' ./${nomad_job}/${nomad_job}.nomad")
+        sh("sed -ie 's/NOMAD_PARAM_${nomad_job}_version/${version}/g' ./${nomad_job}/${nomad_job}.nomad")
 
         echo 'job syntax validation'
         nomad_docker.inside {
