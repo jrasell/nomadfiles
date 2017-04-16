@@ -30,4 +30,4 @@ All [non-system Nomad types](https://www.nomadproject.io/docs/runtime/schedulers
 
 ## Contributing
 
-Any contributions are much appreciated. Submit Pull Requests and Issues to the [Consulate project on GitHub](https://github.com/elsevier-core-engineering/consulate).
+Any contributions are much appreciated. Submit Pull Requests and Issues to the [nomadfiles project on GitHub](https://github.com/jrasell/nomadfiles).
