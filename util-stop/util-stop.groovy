@@ -20,7 +20,7 @@ for (env in util_envs) {
                       }
                   }
               }
-              scriptPath("./util_stop/Jenkinsfile")
+              scriptPath("./util-stop/Jenkinsfile")
             }
         }
     }
