@@ -1,0 +1,26 @@
+node {
+    ansiColor('xterm') {
+        git url: 'git@github.com:jrasell/nomadfiles.git'
+        def nomad_docker = docker.image('djenriquez/nomad:v0.6.0')
+        nomad_docker.pull()
+
+        stage 'stop job'
+        if("${purge}") {
+            nomad_docker.inside {
+                sh """
+                nomad stop -purge\
+                -address=http://${nomad_url}:4646\
+                ${job_name}
+                """
+            }
+        } else {
+            nomad_docker.inside {
+                sh """
+                nomad stop\
+                -address=http://${nomad_url}:4646\
+                ${job_name}
+                """
+            }
+        }
+    }
+}
