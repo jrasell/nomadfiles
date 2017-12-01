@@ -1,0 +1,11 @@
+datacenter: 'jrasell-prod'
+region: 'london'
+
+# Artifact
+version: 'v1.5.3'
+binary_name: 'fabio-1.5.3-go1.8.5-linux_amd64'
+
+# Resources
+cpu: 500
+memory: 512
+mbits: 1

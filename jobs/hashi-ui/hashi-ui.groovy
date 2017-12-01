@@ -1,13 +1,12 @@
-def util_envs = [
-            'prod':'nomad.jrasell.com'
+def hashiui_envs = [
+            'prod':'nomad.jrasell.com',
+            'nonprod':'nomad.np.jrasell.com'
             ]
 
-for (env in util_envs) {
-      pipelineJob("nomad_util_${env.key}_stop") {
+for (env in hashiui_envs) {
+      pipelineJob("nomad_deploy_${env.key}_hashi-ui") {
           parameters {
-          stringParam("job_name", '', 'the Nomad job to stop')
           stringParam("nomad_url", "${env.value}", 'the URL of the Nomad HTTP API endpoint')
-          booleanParam('purge', false, 'run the purge flag with the stop command')
       }
 
       definition{
@@ -20,7 +19,7 @@ for (env in util_envs) {
                       }
                   }
               }
-              scriptPath("./util-stop/Jenkinsfile")
+              scriptPath("./jobs/hashi-ui/Jenkinsfile")
             }
         }
     }

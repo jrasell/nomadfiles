@@ -1,0 +1,13 @@
+datacenter: 'dc1'
+region: 'global'
+
+# Artifact
+version: 'v0.13.1'
+
+# URLPrefix
+urlprefix: 'hashi-ui.np.jrasell.com/'
+
+# Resources
+cpu: 100
+memory: 64
+mbits: 1

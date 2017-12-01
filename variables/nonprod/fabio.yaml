@@ -1,0 +1,11 @@
+datacenter: 'dc1'
+region: 'global'
+
+# Artifact
+version: 'v1.5.3'
+binary_name: 'fabio-1.5.3-go1.8.5-linux_amd64'
+
+# Resources
+cpu: 100
+memory: 64
+mbits: 1

@@ -1,0 +1,13 @@
+datacenter: 'jrasell-prod'
+region: 'london'
+
+# Artifact
+version: 'v0.13.1'
+
+# URLPrefix
+urlprefix: 'hashi-ui.jrasell.com/'
+
+# Resources
+cpu: 200
+memory: 128
+mbits: 1
