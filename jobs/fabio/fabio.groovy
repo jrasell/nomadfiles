@@ -1,12 +1,11 @@
 def fabio_envs = [
-            'prod':'nomad.jrasell.com'
+            'prod':'nomad.jrasell.com',
+            'nonprod':'nomad.np.jrasell.com'
             ]
 
 for (env in fabio_envs) {
       pipelineJob("nomad_deploy_${env.key}_fabio") {
           parameters {
-          stringParam("command", '', 'the command to execute')
-          stringParam("version", '', 'the version of the application')
           stringParam("nomad_url", "${env.value}", 'the URL of the Nomad HTTP API endpoint')
       }
 
@@ -20,7 +19,7 @@ for (env in fabio_envs) {
                       }
                   }
               }
-              scriptPath("./fabio/Jenkinsfile")
+              scriptPath("./jobs/fabio/Jenkinsfile")
             }
         }
     }

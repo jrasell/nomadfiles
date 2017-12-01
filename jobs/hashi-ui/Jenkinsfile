@@ -1,0 +1,20 @@
+node {
+    ansiColor('xterm') {
+        git url: 'git@github.com:jrasell/nomadfiles.git'
+        def levant_docker = docker.image('jrasell/levant:0.0.2')
+        levant_docker.pull()
+
+        def nomad_job = "${env.JOB_NAME}".tokenize( '_' )[3]
+        def nomad_env = "${env.JOB_NAME}".tokenize( '_' )[2]
+
+        stage 'run job'
+        levant_docker.inside {
+              sh """
+              levant deploy\
+              -address=http://${nomad_url}:4646\
+              -var-file=./variables/${nomad_env}/fabio.yaml\
+              ./jobs/${nomad_job}/${nomad_job}.nomad
+              """
+        }
+    }
+}

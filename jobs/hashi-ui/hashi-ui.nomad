@@ -1,11 +1,8 @@
 # This job will deploy https://github.com/jippi/hashi-ui using the
 # docker driver.
-#
-# Parameters:
-#   - HASHIUI_URLPREFIX : the fabio urlprefix to use for this job
 job "hashi-ui" {
-  datacenters = ["${DATACENTER_NAME}"]
-  region      = "${REGION}"
+  datacenters = ["[[.datacenter]]"]
+  region      = "[[.region]]"
   type        = "service"
 
   update {
@@ -17,15 +14,11 @@ job "hashi-ui" {
     count = 1
 
     task "hashi-ui" {
-      constraint {
-        attribute = "${attr.kernel.name}"
-        value     = "linux"
-      }
 
       driver = "docker"
 
       config {
-        image = "jippi/hashi-ui:v0.13.1"
+        image = "jippi/hashi-ui:[[.version]]"
 
         port_map {
           http = 3000
@@ -34,7 +27,7 @@ job "hashi-ui" {
 
       service {
         name = "hashi-ui"
-        tags = ["http", "ui", "urlprefix-${HASHIUI_URLPREFIX}"]
+        tags = ["http", "ui", "urlprefix-[[.urlprefix]]", "[[.version]]"]
 
         port = "http"
 
@@ -52,11 +45,11 @@ job "hashi-ui" {
       }
 
       resources {
-        cpu    = 500
-        memory = 512
+        cpu    = [[.cpu]]
+        memory = [[.memory]]
 
         network {
-          mbits = 1
+          mbits = [[.mbits]]
           port  "http"{}
         }
       }

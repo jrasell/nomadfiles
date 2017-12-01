@@ -2,8 +2,8 @@
 # cluster as a system task. This ensures it will run on all nomad nodes which
 # have avaiable resources.
 job "fabio" {
-  datacenters = ["jrasell"]
-  region      = "london"
+  datacenters = ["[[.datacenter]]"]
+  region      = "[[.region]]"
   type        = "system"
 
   update {
@@ -12,6 +12,7 @@ job "fabio" {
   }
 
   group "fabio" {
+
     task "fabio" {
       constraint {
         attribute = "${attr.kernel.name}"
@@ -21,16 +22,16 @@ job "fabio" {
       driver = "exec"
 
       config {
-        command = "./NOMAD_PARAM_fabio_command"
+        command = "./[[.binary_name]]"
       }
 
       artifact {
-        source = "https://github.com/eBay/fabio/releases/download/vNOMAD_PARAM_fabio_version/NOMAD_PARAM_fabio_command"
+        source = "https://github.com/fabiolb/fabio/releases/download/[[.version]]/[[.binary_name]]"
       }
 
       service {
-        name = "fabio"
-        tags = ["http", "load-balancer"]
+        name = "fabio-http"
+        tags = ["http", "load-balancer", "[[.version]]"]
 
         port = "http"
 
@@ -41,12 +42,26 @@ job "fabio" {
         }
       }
 
+      service {
+        name = "fabio-ui"
+        tags = ["ui", "load-balancer", "[[.version]]"]
+
+        port = "ui"
+
+        check {
+          type     = "http"
+          path     = "/"
+          interval = "30s"
+          timeout  = "3s"
+        }
+      }
+
       resources {
-        cpu    = 500
-        memory = 512
+        cpu    = [[.cpu]]
+        memory = [[.memory]]
 
         network {
-          mbits = 1
+          mbits = [[.mbits]]
 
           # Fabio acts as the routing layer therefore static ports are used for
           # both the http and ui ports.
