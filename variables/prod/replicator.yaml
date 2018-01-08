@@ -1,0 +1,10 @@
+datacenter: 'jrasell-prod'
+region: 'london'
+
+# Artifact
+version: 'v1.0.3'
+
+# Resources
+cpu: 500
+memory: 512
+mbits: 1
