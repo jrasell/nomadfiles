@@ -1,0 +1,26 @@
+datacenter: 'dc1'
+region: 'global'
+
+# Artifact
+version: 'v0.2.4'
+
+# Vault
+vault_policy: 'np-atlantis'
+vault_path: 'aws/creds/np-atlantis'
+
+# Atlantis
+url: 'atlantis.np.jrasell.com'
+gitlab_hostname: 'https://gitlab.jrasell.com'
+gitlab_user: 'jrasell-np'
+gitlab_token: 'XXXXXXXXXXXXXXXXXXXX'
+
+# AWS
+region: 'us-east-1'
+
+# URLPrefix
+urlprefix: 'urlprefix-atlantis.np.jrasell.com/'
+
+# Resources
+cpu: 250
+memory: 64
+mbits: 1
